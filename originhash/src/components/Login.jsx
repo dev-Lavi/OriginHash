@@ -1,9 +1,46 @@
-import { FaUser, FaLock, FaGoogle, FaFacebook } from "react-icons/fa";
+import { FaUser, FaLock, FaGoogle } from "react-icons/fa";
 import illustration from "../assets/illustarion.png";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate();
+
+  // State hooks for login form
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  // Submit handler
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!email || !password) return alert("Please fill in all fields");
+
+    const payload = {
+      email,
+      password,
+    };
+
+    try {
+      setLoading(true);
+      const res = await axios.post("https://originhash.onrender.com/api/v1/users/login", payload);
+      const { token, user, success } = res.data;
+
+      if (success) {
+        // Store data in localStorage
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(user));
+
+        alert("Login successful!");
+        navigate("/dashboard"); // or wherever you'd like to redirect
+      }
+    } catch (err) {
+      alert(err.response?.data?.message || "Login failed.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#edeef7] to-[#e0e7ff] p-4">
@@ -15,13 +52,15 @@ const Login = () => {
             Please enter your credentials to Login
           </p>
 
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={handleSubmit}>
             <div className="flex items-center gap-2 bg-gray-100 px-4 py-3 rounded-xl">
               <FaUser className="text-gray-400" />
               <input
-                type="text"
-                placeholder="Username"
+                type="email"
+                placeholder="Email"
                 className="bg-transparent w-full outline-none"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
@@ -31,14 +70,17 @@ const Login = () => {
                 type="password"
                 placeholder="Password"
                 className="bg-transparent w-full outline-none"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
 
             <button
               type="submit"
+              disabled={loading}
               className="w-full bg-[#6C4CFF] hover:bg-[#5c3fe0] text-white py-3 rounded-xl shadow-md font-semibold transition"
             >
-              Login Now
+              {loading ? "Logging in..." : "Login Now"}
             </button>
           </form>
 
