@@ -6,8 +6,46 @@ const ForgotPassword = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#edeef7] to-[#e0e7ff] p-4">
-      <div className="bg-white rounded-3xl shadow-xl w-full max-w-5xl grid md:grid-cols-2 overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#6C4CFF]/50 to-[#edeef7]/60 p-4 relative">
+
+              {/* White circle attached to top left of the form */}
+      <span className="absolute z-0"
+        style={{
+          top: 'calc(45% - 13rem)',
+          left: 'calc(47% - 33rem)',
+          width: '7rem',
+          height: '7rem',
+          borderRadius: '50%',
+          background: 'white',
+          opacity: 0.8,
+          boxShadow: '0 0 40px 0 #e0e7ff'
+        }}
+      ></span>
+      {/* Purple circle attached to bottom right of the form */}
+      <span className="absolute z-0"
+        style={{
+          bottom: 'calc(40% - 11rem)',
+          right: 'calc(47% - 33rem)',
+          width: '7rem',
+          height: '7rem',
+          borderRadius: '50%',
+          background: '#735FFF',
+          opacity: 0.7,
+          boxShadow: '0 0 40px 0 #7568ff44'
+        }}
+      ></span>
+
+      <div className="bg-white rounded-3xl shadow-xl w-full max-w-5xl grid md:grid-cols-2 overflow-hidden relative">
+
+                {/* Right Illustration Section */}
+        <div className="bg-[#735fff] hidden md:flex items-center justify-center relative">
+          <img
+            src={illustration}
+            alt="Illustration"
+            className="w-[48%] max-w-md drop-shadow-xl rounded-2xl"
+          />
+        </div>
+
         {/* Left Form Section */}
         <div className="flex flex-col justify-center p-10">
           <h2 className="text-3xl font-bold text-center mb-2">
@@ -35,20 +73,6 @@ const ForgotPassword = () => {
             </button>
           </form>
 
-          <div className="my-6 flex items-center justify-center">
-            <hr className="flex-grow border-t border-gray-300" />
-            <span className="mx-4 font-semibold text-gray-600 text-sm">
-              Or Sign In with
-            </span>
-            <hr className="flex-grow border-t border-gray-300" />
-          </div>
-
-          <div className="space-y-3">
-            <button className="w-full border border-gray-300 flex items-center justify-center gap-3 py-2 rounded-xl hover:bg-gray-50 transition">
-              <FaGoogle className="text-xl text-red-500" />
-              <span>Sign in with Google</span>
-            </button>
-          </div>
 
           {/* Additional Links Section */}
           <div className="mt-8 flex flex-col items-center space-y-3">
@@ -70,15 +94,6 @@ const ForgotPassword = () => {
               </button>
             </p>
           </div>
-        </div>
-
-        {/* Right Illustration Section */}
-        <div className="bg-[#735fff] hidden md:flex items-center justify-center relative">
-          <img
-            src={illustration}
-            alt="Illustration"
-            className="w-[60%] max-w-md drop-shadow-xl rounded-2xl"
-          />
         </div>
       </div>
     </div>

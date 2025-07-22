@@ -7,6 +7,7 @@ import './Login.css'
 
 const Login = () => {
   const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState("signin");
 
   // State hooks for login form
   const [email, setEmail] = useState("");
@@ -44,10 +45,74 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#edeef7] to-[#e0e7ff] p-4">
-      <div className="bg-white rounded-3xl shadow-xl w-full max-w-5xl grid md:grid-cols-2 overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#6C4CFF]/50 to-[#edeef7]/60 p-4 relative">
+      {/* White circle attached to top left of the form */}
+      <span className="absolute z-0"
+        style={{
+          top: 'calc(45% - 19rem)',
+          left: 'calc(47% - 33rem)',
+          width: '7rem',
+          height: '7rem',
+          borderRadius: '50%',
+          background: 'white',
+          opacity: 0.8,
+          boxShadow: '0 0 40px 0 #e0e7ff'
+        }}
+      ></span>
+      {/* Purple circle attached to bottom right of the form */}
+      <span className="absolute z-0"
+        style={{
+          bottom: 'calc(40% - 17rem)',
+          right: 'calc(47% - 33rem)',
+          width: '7rem',
+          height: '7rem',
+          borderRadius: '50%',
+          background: '#735FFF',
+          opacity: 0.7,
+          boxShadow: '0 0 40px 0 #7568ff44'
+        }}
+      ></span>
+      
+      <div className="bg-white rounded-3xl shadow-xl w-full max-w-5xl grid md:grid-cols-2 overflow-hidden relative z-10 mt-8">
+
+                {/* Right Illustration Section */}
+        <div className="bg-[#735fff] hidden md:flex items-center justify-center relative">
+          <img
+            src={illustration}
+            alt="Illustration"
+            className="w-[60%] max-w-md drop-shadow-xl rounded-2xl"
+          />
+        </div>
+
         {/* Left Form Section */}
         <div className="flex flex-col justify-center p-10">
+          {/* Sign In / Sign Up Switch */}
+          <div className="flex bg-gray-100 rounded-xl mb-8 w-full max-w-xs mx-auto">
+            <button
+              className={`flex-1 py-2 rounded-xl font-semibold transition ${
+                activeTab === "signin"
+                  ? "bg-white text-gray-900 shadow border border-gray-300"
+                  : "text-gray-400"
+              }`}
+              onClick={() => setActiveTab("signin")}
+            >
+              Login
+            </button>
+            <button
+              className={`flex-1 py-2 rounded-xl font-semibold transition ${
+                activeTab === "signup"
+                  ? "bg-white text-gray-900 shadow border border-gray-300"
+                  : "text-gray-400"
+              }`}
+              onClick={() => {
+                setActiveTab("signup");
+                navigate("/register");
+              }}
+            >
+              Register
+            </button>
+          </div>
+
           <h2 className="text-3xl font-bold text-center mb-2">Welcome back!</h2>
           <p className="text-center text-gray-500 mb-6">
             Please enter your credentials to Login
@@ -58,7 +123,7 @@ const Login = () => {
               <FaUser className="text-gray-400" />
               <input
                 type="email"
-                placeholder="Email"
+                placeholder="Enter your email"
                 className="bg-transparent w-full outline-none"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -69,7 +134,7 @@ const Login = () => {
               <FaLock className="text-gray-400" />
               <input
                 type="password"
-                placeholder="Password"
+                placeholder="Enter your Password"
                 className="bg-transparent w-full outline-none"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -131,14 +196,7 @@ const Login = () => {
           </div>
         </div>
 
-        {/* Right Illustration Section */}
-        <div className="bg-[#735fff] hidden md:flex items-center justify-center relative">
-          <img
-            src={illustration}
-            alt="Illustration"
-            className="w-[60%] max-w-md drop-shadow-xl rounded-2xl"
-          />
-        </div>
+
       </div>
     </div>
   );
