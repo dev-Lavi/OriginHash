@@ -1,8 +1,9 @@
-import { FaUser, FaLock, FaGoogle } from "react-icons/fa";
+import { FaUser, FaLock } from "react-icons/fa";
 import illustration from "../assets/illustarion.png";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import './Login.css'
 
 const Login = () => {
   const navigate = useNavigate();
@@ -92,10 +93,15 @@ const Login = () => {
             <hr className="flex-grow border-t border-gray-300" />
           </div>
 
+          {/* Login with google button */}
           <div className="space-y-3">
-            <button className="w-full border border-gray-300 flex items-center justify-center gap-3 py-2 rounded-xl hover:bg-gray-50 transition">
-              <FaGoogle className="text-xl text-red-500" />
-              <span>Login with Google</span>
+            <button className="google-login-btn w-full border border-gray-300 flex items-center justify-center gap-3 py-2 rounded-xl hover:bg-gray-50 transition">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Google_Favicon_2025.svg"
+                alt="Google"
+                className="w-6 h-6"
+              />
+              <span className="text-base font-medium text-center">Login with Google</span>
             </button>
           </div>
 

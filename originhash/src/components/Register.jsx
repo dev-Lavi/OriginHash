@@ -121,9 +121,13 @@ const Register = () => {
           </div>
 
           <div className="space-y-3">
-            <button className="w-full border border-gray-300 flex items-center justify-center gap-3 py-2 rounded-xl hover:bg-gray-50 transition">
-              <FaGoogle className="text-xl text-red-500" />
-              <span className="text-sm sm:text-base">Register with Google</span>
+            <button className="google-register-btn w-full border border-gray-300 flex items-center justify-center gap-3 py-2 rounded-xl hover:bg-gray-50 transition">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Google_Favicon_2025.svg"
+                alt="Google"
+                className="w-6 h-6"
+              />
+              <span>Login with Google</span>
             </button>
           </div>
 
