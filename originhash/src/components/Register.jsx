@@ -49,29 +49,38 @@ const Register = () => {
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#6C4CFF]/50 to-[#edeef7]/60 p-4 relative">
 
          {/* White circle attached to top left of the form */}
-      <span className="absolute z-0"
+      <span className="forgot-circle absolute z-0"
         style={{
-          top: 'calc(44% - 18rem)',
-          left: 'calc(47% - 33rem)',
-          width: '7rem',
-          height: '7rem',
+          width: '9vw',
+          height: '9vw',
+          minWidth: '60px',
+          minHeight: '60px',
+          maxWidth: '120px',
+          maxHeight: '120px',
           borderRadius: '50%',
           background: 'white',
           opacity: 0.8,
-          boxShadow: '0 0 40px 0 #e0e7ff'
+          boxShadow: '0 0 40px 0 #e0e7ff',
+          top: '20%',
+          left: '15%',
+          transform: 'translate(-110%, -110%)'
         }}
       ></span>
-      {/* Purple circle attached to bottom right of the form */}
-      <span className="absolute z-0"
+      <span className="forgot-circle absolute z-0"
         style={{
-          bottom: 'calc(39% - 16rem)',
-          right: 'calc(47% - 33rem)',
-          width: '7rem',
-          height: '7rem',
+          width: '9vw',
+          height: '9vw',
+          minWidth: '60px',
+          minHeight: '60px',
+          maxWidth: '120px',
+          maxHeight: '120px',
           borderRadius: '50%',
           background: '#735FFF',
           opacity: 0.7,
-          boxShadow: '0 0 40px 0 #7568ff44'
+          boxShadow: '0 0 40px 0 #7568ff44',
+          bottom: '19%',
+          right: '15%',
+          transform: 'translate(110%, 110%)'
         }}
       ></span>
 

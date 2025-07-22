@@ -44,7 +44,7 @@ const ForgotPassword = () => {
         }}
       ></span>
 
-      <div className="bg-white rounded-3xl shadow-xl w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 overflow-hidden relative z-10 mt-8 mx-2">
+      <div className="bg-white rounded-3xl shadow-xl w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 overflow-hidden relative z-10">
         {/* Right Illustration Section */}
         <div className="bg-[#735fff] hidden md:flex items-center justify-center relative">
           <img
