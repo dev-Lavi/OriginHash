@@ -82,7 +82,8 @@ const Login = () => {
         }}
       ></span>
       
-      <div className="bg-white rounded-3xl shadow-xl w-full max-w-5xl grid md:grid-cols-2 overflow-hidden relative z-10 mt-8">
+      <div className="bg-white rounded-3xl shadow-xl w-full max-w-5xl grid md:grid-cols-2 overflow-hidden relative z-10 mt-0 md:mt-8">
+
 
                 {/* Right Illustration Section */}
         <div className="bg-[#735fff] hidden md:flex items-center justify-center relative">
