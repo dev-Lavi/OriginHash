@@ -1,43 +1,51 @@
 import { FaEnvelope, FaGoogle } from "react-icons/fa";
 import illustration from "../assets/illustarion.png";
 import { useNavigate } from "react-router-dom";
+import "./ForgotPassword.css";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#6C4CFF]/50 to-[#edeef7]/60 p-4 relative">
-
-              {/* White circle attached to top left of the form */}
-      <span className="absolute z-0"
+      {/* Circles only visible on laptop/desktop */}
+      <span className="forgot-circle absolute z-0"
         style={{
-          top: 'calc(45% - 13rem)',
-          left: 'calc(47% - 33rem)',
-          width: '7rem',
-          height: '7rem',
+          width: '9vw',
+          height: '9vw',
+          minWidth: '60px',
+          minHeight: '60px',
+          maxWidth: '120px',
+          maxHeight: '120px',
           borderRadius: '50%',
           background: 'white',
           opacity: 0.8,
-          boxShadow: '0 0 40px 0 #e0e7ff'
+          boxShadow: '0 0 40px 0 #e0e7ff',
+          top: '31%',
+          left: '16%',
+          transform: 'translate(-110%, -110%)'
         }}
       ></span>
-      {/* Purple circle attached to bottom right of the form */}
-      <span className="absolute z-0"
+      <span className="forgot-circle absolute z-0"
         style={{
-          bottom: 'calc(40% - 11rem)',
-          right: 'calc(47% - 33rem)',
-          width: '7rem',
-          height: '7rem',
+          width: '9vw',
+          height: '9vw',
+          minWidth: '60px',
+          minHeight: '60px',
+          maxWidth: '120px',
+          maxHeight: '120px',
           borderRadius: '50%',
           background: '#735FFF',
           opacity: 0.7,
-          boxShadow: '0 0 40px 0 #7568ff44'
+          boxShadow: '0 0 40px 0 #7568ff44',
+          bottom: '29%',
+          right: '16%',
+          transform: 'translate(110%, 110%)'
         }}
       ></span>
 
-      <div className="bg-white rounded-3xl shadow-xl w-full max-w-5xl grid md:grid-cols-2 overflow-hidden relative">
-
-                {/* Right Illustration Section */}
+      <div className="bg-white rounded-3xl shadow-xl w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 overflow-hidden relative z-10 mt-8 mx-2">
+        {/* Right Illustration Section */}
         <div className="bg-[#735fff] hidden md:flex items-center justify-center relative">
           <img
             src={illustration}
@@ -47,7 +55,7 @@ const ForgotPassword = () => {
         </div>
 
         {/* Left Form Section */}
-        <div className="flex flex-col justify-center p-10">
+        <div className="flex flex-col justify-center p-6 sm:p-8 md:p-10">
           <h2 className="text-3xl font-bold text-center mb-2">
             FORGOT PASSWORD
           </h2>
@@ -72,7 +80,6 @@ const ForgotPassword = () => {
               Send Reset Link
             </button>
           </form>
-
 
           {/* Additional Links Section */}
           <div className="mt-8 flex flex-col items-center space-y-3">
