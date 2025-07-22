@@ -119,7 +119,8 @@ const Register = () => {
             <span className="mx-4 font-semibold text-gray-600 text-sm">Or Sign Up with</span>
             <hr className="flex-grow border-t border-gray-300" />
           </div>
-
+             
+            {/* Google Register Button */}
           <div className="space-y-3">
             <button className="google-register-btn w-full border border-gray-300 flex items-center justify-center gap-3 py-2 rounded-xl hover:bg-gray-50 transition">
               <img
@@ -127,10 +128,11 @@ const Register = () => {
                 alt="Google"
                 className="w-6 h-6"
               />
-              <span>Login with Google</span>
+              <span className="text-base font-medium text-center">Register with Google</span>
             </button>
           </div>
 
+              {/* Already have an account */}
           <div className="mt-8 flex flex-col items-center space-y-3">
             <p className="text-gray-600 text-sm sm:text-base">
               Already have an account?

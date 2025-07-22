@@ -1,59 +1,6 @@
 /* ...existing styles... */
 
-@media (max-width: 504px) {
-  .min-h-screen {
-    min-height: 100vh;
-  }
-  .p-10 {
-    padding: 1.25rem !important;
-  }
-  .rounded-3xl {
-    border-radius: 1rem !important;
-  }
-  .max-w-5xl {
-    max-width: 98vw !important;
-  }
-  .grid.md\:grid-cols-2 {
-    display: block !important;
-  }
-  .flex-col {
-    flex-direction: column !important;
-  }
-  .justify-center {
-    justify-content: flex-start !important;
-  }
-  .bg-white {
-    border-radius: 1rem !important;
-    box-shadow: 0 2px 8px 0 rgba(80, 63, 205, 0.10);
-  }
-  .hidden.md\:flex {
-    display: none !important;
-  }
-  .space-y-4 > * + * {
-    margin-top: 1rem !important;
-  }
-  .mt-8 {
-    margin-top: 1.5rem !important;
-  }
-  .my-6 {
-    margin-top: 1rem !important;
-    margin-bottom: 1rem !important;
-  }
-  .w-full {
-    width: 100% !important;
-  }
-  .gap-8 {
-    gap: 1rem !important;
-  }
-  .py-3 {
-    padding-top: 0.75rem !important;
-    padding-bottom: 0.75rem !important;
-  }
-  .px-4 {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
-  }
-}
+
 
 @media (max-width: 506px) {
   .google-register-btn {
