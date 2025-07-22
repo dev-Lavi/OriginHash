@@ -88,13 +88,13 @@ const Register = () => {
               />
             </div>
 
-            {/* User Type Checkboxes */}
+            {/* User Type Radios */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-center gap-4 sm:gap-6 md:gap-8 rounded-2xl border border-[#e0e7ff] bg-white py-3 px-4 mt-2 mb-2">
-              {["corporate", "admin", "individual"].map((type) => (
+              {["admin", "corporate", "individual"].map((type) => (
                 <label key={type} className="flex items-center gap-2 font-semibold text-gray-700 text-sm sm:text-base">
                   <input
-                    type="checkbox"
-                    className="w-5 h-5 rounded border-2 border-[#a5b4fc] focus:ring-0"
+                    type="radio"
+                    className="w-5 h-5 border-2 border-[#a5b4fc] focus:ring-0"
                     name="userType"
                     value={type}
                     checked={userType === type}
