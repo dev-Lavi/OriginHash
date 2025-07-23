@@ -1,74 +1,76 @@
-import { FaEnvelope, FaGoogle } from "react-icons/fa";
+import { FaEnvelope } from "react-icons/fa";
 import illustration from "../assets/illustarion.png";
 import { useNavigate } from "react-router-dom";
-import "./ForgotPassword.css";
+import { useState } from "react";
+import axios from "axios";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await axios.post("https://originhash.onrender.com/api/v1/users/forgot-password", { email });
+      alert("Reset link sent successfully!");
+      setEmail("");
+    } catch (error) {
+      console.error(error);
+      alert("Error sending reset link.");
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#6C4CFF]/50 to-[#edeef7]/60 p-4 relative">
-      {/* Circles only visible on laptop/desktop */}
-      <span className="forgot-circle absolute z-0"
+      {/* White circle top-left */}
+      <span className="absolute z-0 hidden sm:block"
         style={{
-          width: '9vw',
-          height: '9vw',
-          minWidth: '60px',
-          minHeight: '60px',
-          maxWidth: '120px',
-          maxHeight: '120px',
+          top: '0',
+          left: '0',
+          width: '7rem',
+          height: '7rem',
           borderRadius: '50%',
           background: 'white',
           opacity: 0.8,
-          boxShadow: '0 0 40px 0 #e0e7ff',
-          top: '31%',
-          left: '16%',
-          transform: 'translate(-110%, -110%)'
+          boxShadow: '0 0 40px 0 #e0e7ff'
         }}
       ></span>
-      <span className="forgot-circle absolute z-0"
+
+      {/* Purple circle bottom-right */}
+      <span className="absolute z-0 hidden sm:block"
         style={{
-          width: '9vw',
-          height: '9vw',
-          minWidth: '60px',
-          minHeight: '60px',
-          maxWidth: '120px',
-          maxHeight: '120px',
+          bottom: '0',
+          right: '0',
+          width: '7rem',
+          height: '7rem',
           borderRadius: '50%',
           background: '#735FFF',
           opacity: 0.7,
-          boxShadow: '0 0 40px 0 #7568ff44',
-          bottom: '29%',
-          right: '16%',
-          transform: 'translate(110%, 110%)'
+          boxShadow: '0 0 40px 0 #7568ff44'
         }}
       ></span>
 
-      <div className="bg-white rounded-3xl shadow-xl w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 overflow-hidden relative z-10">
-        {/* Right Illustration Section */}
-        <div className="bg-[#735fff] hidden md:flex items-center justify-center relative">
-          <img
-            src={illustration}
-            alt="Illustration"
-            className="w-[48%] max-w-md drop-shadow-xl rounded-2xl"
-          />
+      <div className="bg-white rounded-3xl shadow-xl w-full max-w-5xl grid md:grid-cols-2 overflow-hidden relative z-10 mt-0 md:mt-8">
+        {/* Right Illustration */}
+        <div className="bg-[#735fff] hidden md:flex items-center justify-center">
+          <img src={illustration} alt="Illustration" className="w-[48%] max-w-md drop-shadow-xl rounded-2xl" />
         </div>
 
-        {/* Left Form Section */}
-        <div className="flex flex-col justify-center p-6 sm:p-8 md:p-10">
-          <h2 className="text-3xl font-bold text-center mb-2">
-            FORGOT PASSWORD
-          </h2>
-          <p className="text-center text-gray-500 mb-6">
-            Enter your email and we'll send you a reset link
-          </p>
+        {/* Left Form */}
+        <div className="flex flex-col justify-center p-10">
+          <h2 className="text-3xl font-bold text-center mb-2">FORGOT PASSWORD</h2>
+          <p className="text-center text-gray-500 mb-6">Enter your email and we'll send you a reset link</p>
 
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={handleSubmit}>
             <div className="flex items-center gap-2 bg-gray-100 px-4 py-3 rounded-xl">
               <FaEnvelope className="text-gray-400" />
               <input
                 type="email"
+                required
                 placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="bg-transparent w-full outline-none"
               />
             </div>
@@ -81,7 +83,7 @@ const ForgotPassword = () => {
             </button>
           </form>
 
-          {/* Additional Links Section */}
+          {/* Links */}
           <div className="mt-8 flex flex-col items-center space-y-3">
             <button
               className="text-[#6C4CFF] font-semibold hover:underline transition"
