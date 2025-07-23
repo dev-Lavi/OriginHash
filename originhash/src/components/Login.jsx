@@ -3,7 +3,10 @@ import illustration from "../assets/illustarion.png";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './Login.css'
+
 
 const Login = () => {
   const navigate = useNavigate();
@@ -15,34 +18,46 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
 
   // Submit handler
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!email || !password) return alert("Please fill in all fields");
+const handleSubmit = async (e) => { 
+  e.preventDefault();
 
-    const payload = {
-      email,
-      password,
-    };
+  if (!email || !password) {
+    return alert("Please fill in all fields");
+  }
 
-    try {
-      setLoading(true);
-      const res = await axios.post("https://originhash.onrender.com/api/v1/users/login", payload);
-      const { token, user, success } = res.data;
-
-      if (success) {
-        // Store data in localStorage
-        localStorage.setItem("token", token);
-        localStorage.setItem("user", JSON.stringify(user));
-
-        alert("Login successful!");
-        navigate("/dashboard"); // or wherever you'd like to redirect
-      }
-    } catch (err) {
-      alert(err.response?.data?.message || "Login failed.");
-    } finally {
-      setLoading(false);
-    }
+  const payload = {
+    email,
+    password,
   };
+
+  try {
+    setLoading(true);
+
+    const res = await axios.post("https://originhash.onrender.com/api/v1/users/login", payload);
+    console.log("res.data:", res.data);
+
+    const { token, user } = res.data;
+
+    if (token) {
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
+
+      toast.success("Login successful!");
+
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 1000); // optional delay for UX
+    } else {
+      toast.error("Login failed.");
+    }
+  } catch (err) {
+    console.error("Login error:", err);
+    toast.error(err.response?.data?.message || "Login failed.");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#6C4CFF]/50 to-[#edeef7]/60 p-4 relative">
@@ -208,7 +223,9 @@ const Login = () => {
 
 
       </div>
+      <ToastContainer />
     </div>
+    
   );
 };
 
