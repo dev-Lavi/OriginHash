@@ -3,6 +3,8 @@ import illustration from "../assets/illustarion.png";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import './Register.css';
 
 const Register = () => {
@@ -17,33 +19,36 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
 
   // Handle form submit
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!name || !email || !password || !userType) {
-      alert("Please fill in all fields.");
-      return;
-    }
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (!name || !email || !password || !userType) {
+    toast.error("Please fill in all fields.");
+    return;
+  }
 
-    const payload = {
-      name,
-      email,
-      password,
-      role: userType,
-    };
-
-    try {
-      setLoading(true);
-      const response = await axios.post("https://originhash.onrender.com/api/v1/users/register", payload);
-      if (response.data.success) {
-        alert("Registration successful!");
-        navigate("/"); // Redirect to login or home
-      }
-    } catch (error) {
-      alert(error.response?.data?.message || "Registration failed.");
-    } finally {
-      setLoading(false);
-    }
+  const payload = {
+    name,
+    email,
+    password,
+    role: userType,
   };
+
+  try {
+    setLoading(true);
+    const response = await axios.post("https://originhash.onrender.com/api/v1/users/register", payload);
+
+    if (response.data.success) {
+      toast.success("Registration successful!");
+      setTimeout(() => {
+        navigate("/"); // Redirect to login
+      }, 1500);
+    }
+  } catch (error) {
+    toast.error(error.response?.data?.message || "Registration failed.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#6C4CFF]/50 to-[#edeef7]/60 p-4 relative">
