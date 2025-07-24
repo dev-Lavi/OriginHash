@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const VerifyEmail = () => {
   const { token } = useParams();
@@ -15,12 +17,15 @@ const VerifyEmail = () => {
 
         if (res.ok) {
           setMessage("✅ Email verified successfully!");
+          toast.success("Email verified successfully!");
           setTimeout(() => navigate("/"), 2000); // redirect to login
         } else {
           setMessage(`❌ Verification failed: ${data}`);
+          toast.error(`Verification failed: ${data}`);
         }
       } catch (err) {
         setMessage("❌ Network error. Please try again later.");
+        toast.error("Network error. Please try again later.");
       } finally {
         setLoading(false);
       }
@@ -39,6 +44,7 @@ const VerifyEmail = () => {
           <p className="text-sm text-gray-700">{message}</p>
         )}
       </div>
+      <ToastContainer />
     </div>
   );
 };

@@ -3,6 +3,8 @@ import illustration from "../assets/illustarion.png";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -13,11 +15,11 @@ const ForgotPassword = () => {
 
     try {
       const res = await axios.post("https://originhash.onrender.com/api/v1/users/forgot-password", { email });
-      alert("Reset link sent successfully!");
+      toast.success("Reset link sent successfully!");
       setEmail("");
     } catch (error) {
       console.error(error);
-      alert("Error sending reset link.");
+      toast.error("Error sending reset link.");
     }
   };
 
@@ -105,6 +107,7 @@ const ForgotPassword = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

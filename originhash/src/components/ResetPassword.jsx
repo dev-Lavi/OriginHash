@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ResetPassword = () => {
   const { token } = useParams(); // Get the token from URL
   const navigate = useNavigate();
   const [newPassword, setNewPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
 
   const handleReset = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setMessage("");
 
     try {
       const response = await fetch(
@@ -28,13 +28,13 @@ const ResetPassword = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setMessage("✅ Password reset successful!");
+        toast.success("Password reset successful!");
         setTimeout(() => navigate("/"), 2000); // redirect to login
       } else {
-        setMessage(`❌ ${data.message || "Something went wrong."}`);
+        toast.error(data.message || "Something went wrong.");
       }
     } catch (err) {
-      setMessage("❌ Error connecting to server.");
+      toast.error("Error connecting to server.");
     } finally {
       setLoading(false);
     }
@@ -61,10 +61,7 @@ const ResetPassword = () => {
             {loading ? "Resetting..." : "Reset Password"}
           </button>
         </form>
-
-        {message && (
-          <div className="mt-4 text-center text-sm text-gray-700">{message}</div>
-        )}
+        <ToastContainer />
       </div>
     </div>
   );

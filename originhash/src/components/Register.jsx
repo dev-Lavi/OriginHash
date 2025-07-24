@@ -3,7 +3,7 @@ import illustration from "../assets/illustarion.png";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import './Register.css';
 
@@ -38,7 +38,7 @@ const handleSubmit = async (e) => {
     const response = await axios.post("https://originhash.onrender.com/api/v1/users/register", payload);
 
     if (response.data.success) {
-      toast.success("Registration successful!");
+      toast.success("Please verify your email!");
       setTimeout(() => {
         navigate("/"); // Redirect to login
       }, 1500);
@@ -214,6 +214,7 @@ const handleSubmit = async (e) => {
 
 
       </div>
+      <ToastContainer />
     </div>
   );
 };
