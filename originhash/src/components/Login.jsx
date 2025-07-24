@@ -16,42 +16,60 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [wrongAttempts, setWrongAttempts] = useState(0);
+  const [lockoutTime, setLockoutTime] = useState(null);
 
   // Submit handler
 const handleSubmit = async (e) => { 
   e.preventDefault();
 
-  if (!email || !password) {
-    return alert("Please fill in all fields");
+  if (lockoutTime && Date.now() < lockoutTime) {
+    toast.error("Login disabled for 1 hour due to too many failed attempts.");
+    return;
   }
 
-  const payload = {
-    email,
-    password,
-  };
+  if (!email || !password) {
+    toast.error("Please fill in all fields");
+    return;
+  }
+
+  const payload = { email, password };
 
   try {
     setLoading(true);
 
     const res = await axios.post("https://originhash.onrender.com/api/v1/users/login", payload);
-    console.log("res.data:", res.data);
-
     const { token, user } = res.data;
 
     if (token) {
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
-
       toast.success("Login successful!");
-
+      setWrongAttempts(0);
+      setLockoutTime(null);
       setTimeout(() => {
         navigate("/dashboard");
-      }, 1000); // optional delay for UX
+      }, 1000);
     } else {
+      setWrongAttempts(prev => {
+        const attempts = prev + 1;
+        if (attempts >= 5) {
+          setLockoutTime(Date.now() + 60 * 60 * 1000); // 1 hour lockout
+          toast.error("Too many attempts. Login disabled for 1 hour.");
+        }
+        return attempts;
+      });
       toast.error("Login failed.");
     }
   } catch (err) {
-    console.error("Login error:", err);
+    setWrongAttempts(prev => {
+      const attempts = prev + 1;
+      if (attempts >= 5) {
+        setLockoutTime(Date.now() + 60 * 60 * 1000); // 1 hour lockout
+        toast.error("Too many attempts. Login disabled for 1 hour.");
+      }
+      return attempts;
+    });
     toast.error(err.response?.data?.message || "Login failed.");
   } finally {
     setLoading(false);
@@ -168,10 +186,20 @@ const handleSubmit = async (e) => {
 
             <button
               type="submit"
-              disabled={loading}
+              disabled={
+                loading ||
+                (lockoutTime && Date.now() < lockoutTime) ||
+                wrongAttempts >= 5
+              }
               className="w-full bg-[#6C4CFF] hover:bg-[#5c3fe0] text-white py-3 rounded-xl shadow-md font-semibold transition"
             >
-              {loading ? "Logging in..." : "Login Now"}
+              {(lockoutTime && Date.now() < lockoutTime)
+                ? "Login disabled for 1 hour"
+                : wrongAttempts >= 5
+                  ? "Too many attempts"
+                  : loading
+                    ? "Logging in..."
+                    : "Login Now"}
             </button>
           </form>
 

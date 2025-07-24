@@ -35,11 +35,11 @@ useEffect(() => {
       closeButton: true, // 👈 ensure close button is visible
     });
 
-    // Use a timeout to give toast time to render before URL changes
+
     setTimeout(() => {
       params.delete("error");
       navigate(`?${params.toString()}`, { replace: true });
-    }, 100); // 👈 Slight delay prevents flickering
+    }, 100); 
   }
 }, [location.search, navigate]);
 
