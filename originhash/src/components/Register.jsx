@@ -5,6 +5,8 @@ import { useState } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import './Register.css';
 
 const Register = () => {
@@ -17,6 +19,19 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [userType, setUserType] = useState("");
   const [loading, setLoading] = useState(false);
+
+  //handle Google login error
+  useEffect(() => {
+  const params = new URLSearchParams(location.search);
+  const error = params.get("error");
+
+  if (error === "not_registered") {
+    toast.info("You need to register first before using Google login", {
+      position: "top-center",
+      autoClose: 5000,
+    });
+  }
+}, [location]);
 
   // Handle form submit
 const handleSubmit = async (e) => {

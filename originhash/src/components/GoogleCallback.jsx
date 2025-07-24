@@ -1,7 +1,8 @@
 // src/components/GoogleCallback.jsx
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const GoogleCallback = () => {
   const navigate = useNavigate();
@@ -20,7 +21,12 @@ const GoogleCallback = () => {
     }
   }, [navigate]);
 
-  return <div>Logging in via Google...</div>;
+  return (
+    <div>
+      Logging in via Google...
+      <ToastContainer />
+    </div>
+  );
 };
 
 export default GoogleCallback;
