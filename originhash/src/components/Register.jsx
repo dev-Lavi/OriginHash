@@ -1,12 +1,11 @@
 import { FaUser, FaLock, FaEnvelope, FaGoogle } from "react-icons/fa";
 import illustration from "../assets/illustarion.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import './Register.css';
 
 const Register = () => {
@@ -22,7 +21,7 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
 
   //handle Google login error
-  useEffect(() => {
+useEffect(() => {
   const params = new URLSearchParams(location.search);
   const error = params.get("error");
 
@@ -30,12 +29,19 @@ const Register = () => {
     toast.info("You need to register first before using Google login", {
       position: "top-center",
       autoClose: 5000,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      closeButton: true, // 👈 ensure close button is visible
     });
-    // Remove error param so toast doesn't show again
-    params.delete("error");
-    navigate(`?${params.toString()}`, { replace: true });
+
+    // Use a timeout to give toast time to render before URL changes
+    setTimeout(() => {
+      params.delete("error");
+      navigate(`?${params.toString()}`, { replace: true });
+    }, 100); // 👈 Slight delay prevents flickering
   }
-}, [location, navigate]);
+}, [location.search, navigate]);
 
   // Handle form submit
 const handleSubmit = async (e) => {
