@@ -11,6 +11,7 @@ import './Register.css';
 
 const Register = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [activeTab, setActiveTab] = useState("signup");
 
   // States for form data
@@ -30,8 +31,11 @@ const Register = () => {
       position: "top-center",
       autoClose: 5000,
     });
+    // Remove error param so toast doesn't show again
+    params.delete("error");
+    navigate(`?${params.toString()}`, { replace: true });
   }
-}, [location]);
+}, [location, navigate]);
 
   // Handle form submit
 const handleSubmit = async (e) => {
