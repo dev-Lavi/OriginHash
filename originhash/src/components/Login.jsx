@@ -185,14 +185,19 @@ const handleSubmit = async (e) => {
 
           {/* Login with google button */}
           <div className="space-y-3">
-            <button className="google-login-btn w-full border border-gray-300 flex items-center justify-center gap-3 py-2 rounded-xl hover:bg-gray-50 transition">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Google_Favicon_2025.svg"
-                alt="Google"
-                className="w-6 h-6"
-              />
-              <span className="text-base font-medium text-center">Login with Google</span>
-            </button>
+<button
+  onClick={() => {
+    window.location.href = "https://originhash.onrender.com/api/v1/auth/google";
+  }}
+  className="google-login-btn w-full border border-gray-300 flex items-center justify-center gap-3 py-2 rounded-xl hover:bg-gray-50 transition"
+>
+  <img
+    src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Google_Favicon_2025.svg"
+    alt="Google"
+    className="w-6 h-6"
+  />
+  <span className="text-base font-medium text-center">Login with Google</span>
+</button>
           </div>
 
           {/* Additional Links Section */}

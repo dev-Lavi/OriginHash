@@ -42,6 +42,35 @@ const ResetPassword = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#6C4CFF]/50 to-[#edeef7]/60 p-4">
+
+            {/* White circle top-left */}
+      <span className="absolute z-0 hidden sm:block"
+        style={{
+          top: '0',
+          left: '0',
+          width: '7rem',
+          height: '7rem',
+          borderRadius: '50%',
+          background: 'white',
+          opacity: 0.8,
+          boxShadow: '0 0 40px 0 #e0e7ff'
+        }}
+      ></span>
+
+      {/* Purple circle bottom-right */}
+      <span className="absolute z-0 hidden sm:block"
+        style={{
+          bottom: '0',
+          right: '0',
+          width: '7rem',
+          height: '7rem',
+          borderRadius: '50%',
+          background: '#735FFF',
+          opacity: 0.7,
+          boxShadow: '0 0 40px 0 #7568ff44'
+        }}
+      ></span>
+      
       <div className="bg-white shadow-xl rounded-2xl w-full max-w-md p-8">
         <h2 className="text-2xl font-bold mb-4 text-center">Reset Your Password</h2>
         <form onSubmit={handleReset} className="space-y-4">

@@ -8,6 +8,8 @@ import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
 import Dashboard from "./pages/Dashboard";
 import VerifyEmail from "./pages/VerifyEmail";
+import GoogleCallback from "./components/GoogleCallback";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
           <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/verify/:token" element={<VerifyEmail />} />
+          <Route path="/auth/callback" element={<GoogleCallback />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </>
     </Router>
