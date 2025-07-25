@@ -68,19 +68,19 @@ const SuperAdminLogin = () => {
         width: '9vw', height: '9vw', minWidth: '60px', minHeight: '60px',
         maxWidth: '120px', maxHeight: '120px', borderRadius: '50%',
         background: 'white', opacity: 0.8, boxShadow: '0 0 40px 0 #e0e7ff',
-        top: '25%', left: '15%', transform: 'translate(-110%, -110%)'
+        top: '20%', left: '15%', transform: 'translate(-110%, -110%)'
       }}></span>
       <span className="forgot-circle absolute z-0" style={{
         width: '9vw', height: '9vw', minWidth: '60px', minHeight: '60px',
         maxWidth: '120px', maxHeight: '120px', borderRadius: '50%',
         background: '#735FFF', opacity: 0.7, boxShadow: '0 0 40px 0 #7568ff44',
-        bottom: '26%', right: '15%', transform: 'translate(110%, 110%)'
+        bottom: '20%', right: '15%', transform: 'translate(110%, 110%)'
       }}></span>
 
-      <div className="bg-white rounded-3xl shadow-xl w-full max-w-5xl grid md:grid-cols-2 overflow-hidden relative z-10">
+      <div className="bg-white rounded-3xl shadow-xl w-full max-w-5xl grid md:grid-cols-2 overflow-hidden relative z-10" style={{ minHeight: "600px" }}>
         {/* Right Illustration */}
         <div className="bg-[#735fff] hidden md:flex items-center justify-center">
-          <img src={illustration} alt="Illustration" className="w-[50%] max-w-md drop-shadow-xl rounded-2xl" />
+          <img src={illustration} alt="Illustration" className="w-[60%] max-w-md drop-shadow-xl rounded-2xl" />
         </div>
 
         {/* Left Form Section */}
