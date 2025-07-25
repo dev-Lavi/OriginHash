@@ -10,6 +10,7 @@ import Dashboard from "./pages/Dashboard";
 import VerifyEmail from "./pages/VerifyEmail";
 import GoogleCallback from "./components/GoogleCallback";
 import NotFound from "./pages/NotFound";
+import SuperAdminLogin from "./pages/SuperAdminLogin";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/verify/:token" element={<VerifyEmail />} />
           <Route path="/auth/callback" element={<GoogleCallback />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/superadmin-login" element={<SuperAdminLogin />} />
         </Routes>
       </>
     </Router>
