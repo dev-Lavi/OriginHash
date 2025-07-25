@@ -11,6 +11,7 @@ import VerifyEmail from "./pages/VerifyEmail";
 import GoogleCallback from "./components/GoogleCallback";
 import NotFound from "./pages/NotFound";
 import SuperAdminLogin from "./pages/SuperAdminLogin";
+import AdminLogin from "./pages/AdminLogin";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/auth/callback" element={<GoogleCallback />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/superadmin-login" element={<SuperAdminLogin />} />
+          <Route path="/admin-login" element={<AdminLogin />} />
         </Routes>
       </>
     </Router>
