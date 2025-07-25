@@ -28,7 +28,7 @@ function App() {
           <Route path="/auth/callback" element={<GoogleCallback />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/superadmin-login" element={<SuperAdminLogin />} />
-          <Route path="/admin-login" element={<AdminLogin />} />
+          <Route path="admin-login/admincredentials" element={<AdminLogin />} />
         </Routes>
       </>
     </Router>
