@@ -12,6 +12,9 @@ import GoogleCallback from "./components/GoogleCallback";
 import NotFound from "./pages/NotFound";
 import SuperAdminLogin from "./pages/SuperAdminLogin";
 import AdminLogin from "./pages/AdminLogin";
+import DashboardLayout from "./components/Layout"
+import IssueCertificate from "./pages/Issuecert";
+import IssuedCertificates from "./pages/IssuedCertificates";
 
 function App() {
   return (
@@ -23,7 +26,31 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+                    <Route
+            path="/dashboard"
+            element={
+              <DashboardLayout>
+                <Dashboard />
+              </DashboardLayout>
+            }
+          />
+                    <Route
+            path="admin/issue-certificate"
+            element={
+              <DashboardLayout>
+                <IssueCertificate />
+              </DashboardLayout>
+            }
+          />
+                              <Route
+            path="admin/issued-certificates"
+            element={
+              <DashboardLayout>
+                <IssuedCertificates />
+              </DashboardLayout>
+            }
+          />
+        
           <Route path="/verify/:token" element={<VerifyEmail />} />
           <Route path="/auth/callback" element={<GoogleCallback />} />
           <Route path="*" element={<NotFound />} />
