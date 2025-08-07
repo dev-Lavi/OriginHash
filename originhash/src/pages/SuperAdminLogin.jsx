@@ -49,7 +49,7 @@ const SuperAdminLogin = () => {
         setLockoutTime(null);
 
         setTimeout(() => {
-          navigate("/superadmin/dashboard");
+          navigate("/superadmin/issued-certificates");
         }, 1000);
       } else {
         throw new Error("Invalid response from server");

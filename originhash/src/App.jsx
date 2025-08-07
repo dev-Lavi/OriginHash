@@ -16,6 +16,7 @@ import DashboardLayout from "./components/Layout"
 import IssueCertificate from "./pages/Issuecert";
 import IssuedCertificates from "./pages/IssuedCertificates";
 import VerifiedCertificates from "./pages/VerifiedCertificates";
+import AllIssuedCertificates from "./pages/allIssuedCertificates";
 
 function App() {
   return (
@@ -56,6 +57,14 @@ function App() {
             element={
               <DashboardLayout>
                 <VerifiedCertificates />
+              </DashboardLayout>
+            }
+          />
+                                                  <Route
+            path="superadmin/issued-certificates"
+            element={
+              <DashboardLayout>
+                <AllIssuedCertificates />
               </DashboardLayout>
             }
           />
