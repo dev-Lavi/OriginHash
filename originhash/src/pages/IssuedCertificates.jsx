@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import styles from './IssuedCertificates.module.css'; // You'll need to style this
+import styles from './IssuedCertificates.module.css';
 import { format } from 'date-fns';
 import { isToday, isYesterday } from 'date-fns';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { motion, AnimatePresence } from 'framer-motion'; // ✅ Import Framer Motion
 
 const API_URL = 'http://localhost:4001/api/v1/certificates/my-issued';
 
@@ -62,21 +63,35 @@ const IssuedCertificates = () => {
     return (
       <>
         <div className={styles.sectionLabel}>{label}</div>
-        {data.map(cert => (
-          <div key={cert._id} className={styles.certificateRow}>
-            <div>{cert.studentName}</div>
-            <div>{cert.courseName}</div>
-            <div>{cert.studentEmail}</div>
-            <div>{format(new Date(cert.issueDate), 'dd/MM/yyyy')}</div>
-            <div>{cert.expiryDate ? format(new Date(cert.expiryDate), 'dd/MM/yyyy') : 'Null'}</div>
-            <div>{cert.uniqueId}</div>
-            <div>
-              <a href={cert.pdfLink} target="_blank" rel="noopener noreferrer" className={styles.previewBtn}>
-                Preview
-              </a>
-            </div>
-          </div>
-        ))}
+        <AnimatePresence>
+          {data.map((cert, index) => (
+            <motion.div
+              key={cert._id}
+              className={styles.certificateRow}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3, delay: index * 0.05 }} // ✅ stagger effect
+            >
+              <div>{cert.studentName}</div>
+              <div>{cert.courseName}</div>
+              <div>{cert.studentEmail}</div>
+              <div>{format(new Date(cert.issueDate), 'dd/MM/yyyy')}</div>
+              <div>{cert.expiryDate ? format(new Date(cert.expiryDate), 'dd/MM/yyyy') : 'Null'}</div>
+              <div>{cert.uniqueId}</div>
+              <div>
+                <a
+                  href={cert.pdfLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.previewBtn}
+                >
+                  Preview
+                </a>
+              </div>
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </>
     );
   };
@@ -97,7 +112,7 @@ const IssuedCertificates = () => {
       </div>
 
       {loading ? (
-        <div>Loading certificates...</div>
+        <div className={styles.loading}>Loading certificates...</div> // ✅ Custom loader class
       ) : (
         <>
           {renderSection("Today", today)}

@@ -1,42 +1,99 @@
-import React, { useState } from "react";
-import { FaBars } from "react-icons/fa";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { FaBars, FaTimes } from "react-icons/fa";
 import { AiOutlineSetting, AiOutlineLogout } from "react-icons/ai";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
-
-import "./Header.css"; 
+import "./Header.css";
 
 const Sidebar = ({ visible, onClose, activeSection, setActiveSection }) => {
   const [certDrop, setCertDrop] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Set active sublink and expand dropdown
+  useEffect(() => {
+    if (
+      location.pathname.startsWith("/admin/issued-certificates") ||
+      location.pathname.startsWith("/admin/verified-certificates")
+    ) {
+      setActiveSection("cert");
+      setCertDrop(true);
+    }
+  }, [location.pathname, setActiveSection]);
+
+  const handleCertLinkClick = (path, section) => {
+    navigate(path);
+    setActiveSection("cert");
+    onClose(); // Close sidebar after navigation
+  };
 
   return (
     <div className={`sidebar ${visible ? "show" : ""}`}>
-<div className="sidebar-logo">
-  <img src="/logo.svg" alt="Logo" height={32} /> {/* ✅ From public folder */}
-  <span style={{ marginLeft: 12, fontWeight: "600", fontSize: 18 }}>OriginHash</span>
-</div>
+      <div className="sidebar-logo">
+        <img src="/logo.svg" alt="Logo" height={32} />
+        <span style={{ marginLeft: 12, fontWeight: "600", fontSize: 18 }}>OriginHash</span>
+        <button className="sidebar-close-btn" onClick={onClose}>
+          <FaTimes size={20} />
+        </button>
+      </div>
 
       <div className="sidebar-nav">
+        <div className="certificates-icon">
         <div
-          className={`sidebar-link${activeSection === "cert" ? " active" : ""}`}
+          className={`sidebar-link cert-link${activeSection === "cert" ? " active" : ""}`}
           onClick={() => setCertDrop(v => !v)}
         >
           <span>Certificates</span>
           {certDrop ? <FiChevronUp size={18} /> : <FiChevronDown size={18} />}
         </div>
+        </div>
         {certDrop && (
           <div className="sidebar-dropdown">
-            <div className="sidebar-sublink">Issue</div>
-            <div className="sidebar-sublink">Issued</div>
-            <div className="sidebar-sublink">Verified</div>
+            <div
+              className={`sidebar-sublink${location.pathname === "/admin/issue-certificate" ? " active" : ""}`}
+              onClick={() => handleCertLinkClick("/admin/issue-certificate", "cert")}
+            >
+              Issue
+            </div>
+            <div
+              className={`sidebar-sublink${location.pathname === "/admin/issued-certificates" ? " active" : ""}`}
+              onClick={() => handleCertLinkClick("/admin/issued-certificates", "cert")}
+            >
+              Issued
+            </div>
+            <div
+              className={`sidebar-sublink${location.pathname === "/admin/verified-certificates" ? " active" : ""}`}
+              onClick={() => handleCertLinkClick("/admin/verified-certificates", "cert")}
+            >
+              Verified
+            </div>
           </div>
         )}
 
-        <div className={`sidebar-link${activeSection === "update" ? " active" : ""}`}>Update</div>
-        <div className={`sidebar-link${activeSection === "support" ? " active" : ""}`}>Support</div>
+        <div
+          className={`sidebar-link${activeSection === "update" ? " active" : ""}`}
+          onClick={() => {
+            navigate("/admin/update");
+            setActiveSection("update");
+            onClose();
+          }}
+        >
+          Update
+        </div>
+        <div
+          className={`sidebar-link${activeSection === "support" ? " active" : ""}`}
+          onClick={() => {
+            navigate("/admin/support");
+            setActiveSection("support");
+            onClose();
+          }}
+        >
+          Support
+        </div>
       </div>
 
       <div className="sidebar-bottom">
-        <div className="sidebar-link"> 
+        <div className="sidebar-link">
           <AiOutlineSetting size={20} style={{ marginRight: 8 }} />
           Settings
         </div>
@@ -54,21 +111,14 @@ const Navbar = ({ onHamburger }) => (
     <button className="hamburger" onClick={onHamburger}>
       <FaBars size={22} />
     </button>
-    <input
-      className="navbar-search"
-      type="text"
-      placeholder="Search here..."
-    />
+
+    <div className="navbar-logo">
+      <img src="/logo.svg" alt="OriginHash Logo" height={28} />
+      <span style={{ marginLeft: 8, fontWeight: 600 }}>OriginHash</span>
+    </div>
+
     <div className="navbar-profile">
-      <img
-        src="/admin.jpg"
-        alt="Admin Avatar"
-        className="navbar-avatar"
-      />
-      <div>
-        <div style={{ fontWeight: 600, fontSize: 15 }}>Ananya Singh</div>
-        <div style={{ fontSize: 13, color: "#777" }}>Admin</div>
-      </div>
+      <img src="/admin.jpg" alt="Admin Avatar" className="navbar-avatar" />
     </div>
   </div>
 );
@@ -86,7 +136,6 @@ const Header = () => {
         activeSection={activeSection}
         setActiveSection={setActiveSection}
       />
-      {/* An overlay to close sidebar on click outside */}
       {sidebarOpen && <div className="sidebar-overlay" onClick={() => setSidebarOpen(false)} />}
     </>
   );

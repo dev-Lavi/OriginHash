@@ -85,6 +85,15 @@
   display: flex;
   align-items: center;
 }
+
+.cert-link {
+    justify-content: space-between;
+}
+
+.cert-link .chevron-icon {
+  margin-left: auto;
+}
+
 .sidebar-link.active,
 .sidebar-link:hover {
   background: #f2f5ff;
@@ -124,4 +133,37 @@
   z-index: 10;
   top: 0; left: 0; width: 100vw; height: 100vh;
   background: rgba(0,0,0,0.12);
+}
+
+/* Sidebar cross (close) button */
+
+
+.sidebar-close-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  position: absolute;
+  right: 6%;
+  top: 5%;
+}
+
+/* Navbar logo replacing search */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.navbar-search {
+  display: none; /* Hides the old search bar */
+}
+
+
+
+@media (max-width: 360px) {
+.navbar-logo span {
+    display: none;
+}
 }
