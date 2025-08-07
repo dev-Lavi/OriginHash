@@ -15,6 +15,7 @@ import AdminLogin from "./pages/AdminLogin";
 import DashboardLayout from "./components/Layout"
 import IssueCertificate from "./pages/Issuecert";
 import IssuedCertificates from "./pages/IssuedCertificates";
+import VerifiedCertificates from "./pages/VerifiedCertificates";
 
 function App() {
   return (
@@ -47,6 +48,14 @@ function App() {
             element={
               <DashboardLayout>
                 <IssuedCertificates />
+              </DashboardLayout>
+            }
+          />
+                                        <Route
+            path="admin/verified-certificates"
+            element={
+              <DashboardLayout>
+                <VerifiedCertificates />
               </DashboardLayout>
             }
           />
