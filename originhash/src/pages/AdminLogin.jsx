@@ -5,6 +5,7 @@ import { useState } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axiosInstance from '../api/axiosInstance'; 
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -32,10 +33,7 @@ const AdminLogin = () => {
 
     try {
       setLoading(true);
-      const res = await axios.post(
-        "https://originhash.onrender.com/api/v1/admin/login",
-        payload
-      );
+     const res = await axiosInstance.post("/api/v1/admin/login", payload);
 
       const { token, isSuperAdmin } = res.data;
 

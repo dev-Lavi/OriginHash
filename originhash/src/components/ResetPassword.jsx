@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axiosInstance from "../api/axiosInstance";
 
 const ResetPassword = () => {
   const { token } = useParams(); // Get the token from URL
@@ -14,8 +15,8 @@ const ResetPassword = () => {
     setLoading(true);
 
     try {
-      const response = await fetch(
-        `https://originhash.onrender.com/api/v1/users/reset-password/${token}`,
+        const res = await axiosInstance.post(
+    `/api/v1/users/reset-password/${token}`,
         {
           method: "POST",
           headers: {

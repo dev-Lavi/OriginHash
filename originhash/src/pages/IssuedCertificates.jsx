@@ -6,8 +6,8 @@ import { isToday, isYesterday } from 'date-fns';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { motion, AnimatePresence } from 'framer-motion'; // ✅ Import Framer Motion
+import axiosInstance from '../api/axiosInstance';
 
-const API_URL = 'http://localhost:4001/api/v1/certificates/my-issued';
 
 const IssuedCertificates = () => {
   const [certificates, setCertificates] = useState([]);
@@ -18,7 +18,7 @@ const IssuedCertificates = () => {
   useEffect(() => {
     const fetchCertificates = async () => {
       try {
-        const res = await axios.get(API_URL, {
+        const res = await axiosInstance.get("/api/v1/certificates/my-issued", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

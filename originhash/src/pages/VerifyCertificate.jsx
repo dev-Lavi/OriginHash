@@ -3,6 +3,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { MdVerified } from "react-icons/md"; // Replace with your desired SVG if needed
 import "./VerifyCertificate.css"; // optional, or use inline styles
+import axiosInstance from "../api/axiosInstance"; // Adjust the import based on your project structure
+
 
 const VerifyCertificate = () => {
   const [certId, setCertId] = useState("");
@@ -15,8 +17,8 @@ const VerifyCertificate = () => {
     setError("");
 
     try {
-      const response = await axios.post(
-        "http://localhost:4001/api/v1/cert/verify",
+      const response = await axiosInstance.post(
+        "/api/v1/certificates/verify",
         
         { uniqueId: certId },
         {

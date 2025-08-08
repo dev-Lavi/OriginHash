@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { format, isToday, isYesterday } from "date-fns";
 import styles from "./VerifiedCertificates.module.css";
+import axiosInstance from "../api/axiosInstance";
 
 const VerifiedCertificates = () => {
   const [certificates, setCertificates] = useState([]);
@@ -10,7 +11,7 @@ const VerifiedCertificates = () => {
     const fetchVerifiedCertificates = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4001/api/v1/certificates/my-verified",
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/certificates/my-verified`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,

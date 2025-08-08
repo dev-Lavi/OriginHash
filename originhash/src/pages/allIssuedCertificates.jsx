@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { format, isToday, isYesterday } from "date-fns";
 import styles from "./allIssuedCertificates.module.css";
-
+import axiosInstance from "../api/axiosInstance";
 const AllIssuedCertificates = () => {
   const [certificates, setCertificates] = useState([]);
 
@@ -11,8 +11,7 @@ useEffect(() => {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await axios.get(
-        "http://localhost:4001/api/v1/certificates/all",
+      const response = await axiosInstance.get("/api/v1/certificates/all",
         {
           headers: {
             Authorization: `Bearer ${token}`,

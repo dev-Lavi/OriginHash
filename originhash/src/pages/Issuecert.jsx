@@ -3,8 +3,8 @@ import axios from 'axios';
 import styles from './IssueCertificate.module.css';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axiosInstance from '../api/axiosInstance';
 
-const API_URL = 'http://localhost:4001/api/v1/certs/issue';
 
 const IssueCertificate = () => {
   const [form, setForm] = useState({
@@ -30,8 +30,8 @@ const IssueCertificate = () => {
     setError('');
     setLoading(true);
     try {
-      const res = await axios.post(
-        API_URL,
+    const res = await axiosInstance.post(
+      "/api/v1/certs/issue",
         {
           studentEmail: form.studentEmail,
           studentName: form.studentName,

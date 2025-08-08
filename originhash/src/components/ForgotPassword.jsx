@@ -5,6 +5,7 @@ import { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axiosInstance from "../api/axiosInstance";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const ForgotPassword = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post("https://originhash.onrender.com/api/v1/users/forgot-password", { email });
+      const res = await axiosInstance.post("/api/v1/users/forgot-password", { email });
       toast.success("Reset link sent successfully!");
       setEmail("");
     } catch (error) {

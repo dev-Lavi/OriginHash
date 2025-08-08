@@ -7,6 +7,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
 import './Register.css';
+import axiosInstance from "../api/axiosInstance";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -60,7 +61,7 @@ const handleSubmit = async (e) => {
 
   try {
     setLoading(true);
-    const response = await axios.post("https://originhash.onrender.com/api/v1/users/register", payload);
+    const response = await axiosInstance.post("/api/v1/users/register", payload);
 
     if (response.data.success) {
       toast.success("Please verify your email!");

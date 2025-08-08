@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 const VerifyEmail = () => {
   const { token } = useParams();
@@ -12,7 +13,9 @@ const VerifyEmail = () => {
   useEffect(() => {
     const verifyEmail = async () => {
       try {
-        const res = await fetch(`https://originhash.onrender.com/api/v1/users/verify/${token}`);
+        const res = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/users/verify/${token}`
+        );
         const data = await res.text();
 
         if (res.ok) {

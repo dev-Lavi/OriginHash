@@ -6,6 +6,7 @@ import axios from "axios";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Login.css'
+import axiosInstance from '../api/axiosInstance';
 
 
 const Login = () => {
@@ -38,7 +39,7 @@ const handleSubmit = async (e) => {
   try {
     setLoading(true);
 
-    const res = await axios.post("http://localhost:4001/api/v1/users/login", payload);
+    const res = await axiosInstance.post("/api/v1/users/login", payload);
     const { token, user } = res.data;
 
     if (token) {
