@@ -68,7 +68,7 @@ const Dashboard = () => {
         </div>
         <nav>
           {sidebarItems.map((item, index) => (
-            <a key={index} href="#" className={styles.sidebarItem}>
+            <a key={index} href="/verify" className={styles.sidebarItem}>
               {item.icon}
               <span>{item.label}</span>
             </a>

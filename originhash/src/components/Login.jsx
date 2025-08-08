@@ -38,17 +38,15 @@ const handleSubmit = async (e) => {
   try {
     setLoading(true);
 
-    const res = await axios.post("https://originhash.onrender.com/api/v1/users/login", payload);
+    const res = await axios.post("http://localhost:4001/api/v1/users/login", payload);
     const { token, user } = res.data;
 
     if (token) {
-      localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(user));
       toast.success("Login successful!");
       setWrongAttempts(0);
       setLockoutTime(null);
       setTimeout(() => {
-        navigate("/dashboard");
+        navigate("/verify");
       }, 1000);
     } else {
       setWrongAttempts(prev => {

@@ -17,6 +17,7 @@ import IssueCertificate from "./pages/Issuecert";
 import IssuedCertificates from "./pages/IssuedCertificates";
 import VerifiedCertificates from "./pages/VerifiedCertificates";
 import AllIssuedCertificates from "./pages/allIssuedCertificates";
+import VerifyCertificate from "./pages/VerifyCertificate";
 
 function App() {
   return (
@@ -74,6 +75,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
           <Route path="/superadmin-login" element={<SuperAdminLogin />} />
           <Route path="admin-login/admincredentials" element={<AdminLogin />} />
+          <Route path="/verify" element={<VerifyCertificate />} />
         </Routes>
       </>
     </Router>
