@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { MdVerified } from "react-icons/md"; // Replace with your desired SVG if needed
-import "./VerifyCertificate.css"; // optional, or use inline styles
-import axiosInstance from "../api/axiosInstance"; // Adjust the import based on your project structure
-
+import { MdVerified } from "react-icons/md";
+import axiosInstance from "../api/axiosInstance";
+import "./VerifyCertificate.css";
 
 const VerifyCertificate = () => {
   const [certId, setCertId] = useState("");
@@ -18,14 +16,12 @@ const VerifyCertificate = () => {
 
     try {
       const response = await axiosInstance.post(
-        "/api/v1/certificates/verify",
-        
+        "/api/v1/cert/verify",
         { uniqueId: certId },
         {
           withCredentials: true,
           headers: {
             "Content-Type": "application/json",
-            // Cookie will be sent automatically if withCredentials is set to true and token is stored
           },
         }
       );
@@ -33,10 +29,13 @@ const VerifyCertificate = () => {
       const { success, cert, message } = response.data;
 
       if (success && cert) {
-        // Navigate to payment page, optionally pass cert info
-        navigate("/payment", { state: { cert } });
+        // ✅ Store uniqueId in localStorage for Step 2
+        localStorage.setItem("uniqueId", cert.uniqueId);
+
+        // ✅ Navigate to payment page with cert details
+        navigate("/verify/payment", { state: { cert } });
       } else {
-        setError("Invalid certificate or verification failed.");
+        setError(message || "Invalid certificate or verification failed.");
       }
     } catch (err) {
       setError(err.response?.data?.message || "Something went wrong.");
@@ -52,7 +51,9 @@ const VerifyCertificate = () => {
           <MdVerified size={48} color="#5E5ADB" />
         </div>
         <h2>Verify Certificate</h2>
-        <p style={{ marginBottom: "1rem", color: "#555" }}>Enter your certificate ID to verify</p>
+        <p style={{ marginBottom: "1rem", color: "#555" }}>
+          Enter your certificate ID to verify
+        </p>
 
         <input
           type="text"

@@ -18,6 +18,8 @@ import IssuedCertificates from "./pages/IssuedCertificates";
 import VerifiedCertificates from "./pages/VerifiedCertificates";
 import AllIssuedCertificates from "./pages/allIssuedCertificates";
 import VerifyCertificate from "./pages/VerifyCertificate";
+import UserDashboardLayout from "./components/UserLayout";
+import PaymentPage from "./pages/PaymentCert";
 
 function App() {
   return (
@@ -32,11 +34,28 @@ function App() {
                     <Route
             path="/dashboard"
             element={
-              <DashboardLayout>
+              <UserDashboardLayout>
                 <Dashboard />
-              </DashboardLayout>
+              </UserDashboardLayout>
             }
           />
+          <Route
+            path="/verify"
+            element={
+              <UserDashboardLayout>
+                <VerifyCertificate />
+              </UserDashboardLayout>
+            }
+          />
+          <Route
+            path="/verify/payment"
+            element={
+              <UserDashboardLayout>
+                <PaymentPage />
+              </UserDashboardLayout>
+            }
+          />
+
                     <Route
             path="admin/issue-certificate"
             element={
@@ -75,7 +94,6 @@ function App() {
           <Route path="*" element={<NotFound />} />
           <Route path="/superadmin-login" element={<SuperAdminLogin />} />
           <Route path="admin-login/admincredentials" element={<AdminLogin />} />
-          <Route path="/verify" element={<VerifyCertificate />} />
         </Routes>
       </>
     </Router>

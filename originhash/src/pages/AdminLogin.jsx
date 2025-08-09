@@ -47,7 +47,7 @@ const AdminLogin = () => {
         setLockoutTime(null);
 
         setTimeout(() => {
-          navigate("/admin/issue-certificate");
+          navigate("/admin/issued-certificates");
         }, 1000);
       } else {
         throw new Error("Invalid response from server");
