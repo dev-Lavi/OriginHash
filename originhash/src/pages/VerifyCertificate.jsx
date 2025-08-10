@@ -2,19 +2,21 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MdVerified } from "react-icons/md";
 import axiosInstance from "../api/axiosInstance";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./VerifyCertificate.css";
 
 const VerifyCertificate = () => {
   const [certId, setCertId] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleVerify = async () => {
     setLoading(true);
-    setError("");
 
     try {
+      const token = localStorage.getItem("authToken");
+
       const response = await axiosInstance.post(
         "/api/v1/cert/verify",
         { uniqueId: certId },
@@ -22,6 +24,7 @@ const VerifyCertificate = () => {
           withCredentials: true,
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -29,16 +32,32 @@ const VerifyCertificate = () => {
       const { success, cert, message } = response.data;
 
       if (success && cert) {
-        // ✅ Store uniqueId in localStorage for Step 2
         localStorage.setItem("uniqueId", cert.uniqueId);
 
-        // ✅ Navigate to payment page with cert details
-        navigate("/verify/payment", { state: { cert } });
+        // ✅ Success toast
+        toast.success("✅ Certificate found! Proceed to payment", {
+          position: "bottom-right",
+          autoClose: 3000,
+          theme: "colored",
+        });
+
+        // Navigate after short delay so user sees the toast
+        setTimeout(() => {
+          navigate("/verify/payment", { state: { cert } });
+        }, 1200);
       } else {
-        setError(message || "Invalid certificate or verification failed.");
+        toast.error(message || "Invalid certificate or verification failed.", {
+          position: "bottom-right",
+          autoClose: 3000,
+          theme: "colored",
+        });
       }
     } catch (err) {
-      setError(err.response?.data?.message || "Something went wrong.");
+      toast.error(err.response?.data?.message || "Something went wrong.", {
+        position: "bottom-right",
+        autoClose: 3000,
+        theme: "colored",
+      });
     } finally {
       setLoading(false);
     }
@@ -63,8 +82,6 @@ const VerifyCertificate = () => {
           className="verify-input"
         />
 
-        {error && <div className="error-text">{error}</div>}
-
         <button
           className="verify-button"
           onClick={handleVerify}
@@ -73,6 +90,9 @@ const VerifyCertificate = () => {
           {loading ? "Verifying..." : "Pay to Verify"}
         </button>
       </div>
+
+      {/* ✅ Toast container */}
+      <ToastContainer />
     </div>
   );
 };

@@ -1,11 +1,15 @@
 import React from 'react';
 import styles from './Dashboard.module.css';
+import JavaScript from "../assets/courses/javascript.jpg";
+import react from "../assets/courses/react.jpg";
+import sql from "../assets/courses/sql.jpg";
+import kotlin from "../assets/courses/kotlin.jpg";
 
 const mockCourses = [
   {
     id: 1,
     title: 'Complete JavaScript',
-    thumbnail: '/images/javascript.jpg',
+    thumbnail: JavaScript,
     creator: 'Dr. Angela Yu',
     rating: 4.8,
     reviews: 1234
@@ -13,7 +17,7 @@ const mockCourses = [
   {
     id: 2,
     title: 'Complete ReactJS',
-    thumbnail: '/images/react.jpg',
+    thumbnail: react,
     creator: 'Dr. Angela Yu',
     rating: 4.9,
     reviews: 987
@@ -21,7 +25,7 @@ const mockCourses = [
   {
     id: 3,
     title: 'Complete JavaScript',
-    thumbnail: '/images/js-advanced.jpg',
+    thumbnail: sql,
     creator: 'Dr. Angela Yu',
     rating: 4.7,
     reviews: 2341
@@ -29,7 +33,7 @@ const mockCourses = [
   {
     id: 4,
     title: 'Complete JavaScript',
-    thumbnail: '/images/excel.jpg',
+    thumbnail: kotlin,
     creator: 'Dr. Angela Yu',
     rating: 4.9,
     reviews: 1567

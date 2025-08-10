@@ -32,7 +32,7 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
                     <Route
-            path="/dashboard"
+            path="/services"
             element={
               <UserDashboardLayout>
                 <Dashboard />

@@ -59,14 +59,14 @@ const Sidebar = ({ visible, onClose, activeSection, setActiveSection }) => {
         )}
 
         <div
-          className={`sidebar-link${activeSection === "Startup" ? " active" : ""}`}
+          className={`sidebar-link${activeSection === "Services" ? " active" : ""}`}
           onClick={() => {
-            navigate("#");
-            setActiveSection("Startup");
+            navigate("/services");
+            setActiveSection("Services");
             onClose();
           }}
         >
-          Startup
+          Services
         </div>
         <div
           className={`sidebar-link${activeSection === "Colleges" ? " active" : ""}`}

@@ -43,11 +43,12 @@ const handleSubmit = async (e) => {
     const { token, user } = res.data;
 
     if (token) {
+      localStorage.setItem("authToken", token);
       toast.success("Login successful!");
       setWrongAttempts(0);
       setLockoutTime(null);
       setTimeout(() => {
-        navigate("/verify");
+        navigate("/services");
       }, 1000);
     } else {
       setWrongAttempts(prev => {
