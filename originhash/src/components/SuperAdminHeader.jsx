@@ -13,8 +13,8 @@ const Sidebar = ({ visible, onClose, activeSection, setActiveSection }) => {
   // Set active sublink and expand dropdown
   useEffect(() => {
     if (
-      location.pathname.startsWith("/services") ||
-      location.pathname.startsWith("/verify")
+      location.pathname.startsWith("/superadmin/issued-certificates") ||
+      location.pathname.startsWith("/superadmin/Verified-certificates")
     ) {
       setActiveSection("cert");
       setCertDrop(true);
@@ -33,7 +33,7 @@ const Sidebar = ({ visible, onClose, activeSection, setActiveSection }) => {
         <img src="/logo.svg" alt="Logo" height={32} />
         <span style={{ marginLeft: 12, fontWeight: "600", fontSize: 18 }}>OriginHash</span>
         <button className="sidebar-close-btn" onClick={onClose}>
-          <FaTimes size={24} />
+          <FaTimes size={20} />
         </button>
       </div>
 
@@ -50,63 +50,39 @@ const Sidebar = ({ visible, onClose, activeSection, setActiveSection }) => {
         {certDrop && (
           <div className="sidebar-dropdown">
             <div
-              className={`sidebar-sublink${location.pathname === "/verify" ? " active" : ""}`}
-              onClick={() => handleCertLinkClick("/verify", "cert")}
+              className={`sidebar-sublink${location.pathname === "/superadmin/issued-certificates" ? " active" : ""}`}
+              onClick={() => handleCertLinkClick("/superadmin/issued-certificates", "cert")}
             >
-              Verify
+              Issued
+            </div>
+            <div
+              className={`sidebar-sublink${location.pathname === "/superadmin/verified-certificates" ? " active" : ""}`}
+              onClick={() => handleCertLinkClick("/superadmin/verified-certificates", "cert")}
+            >
+              Verified
             </div>
           </div>
         )}
 
         <div
-          className={`sidebar-link${activeSection === "Services" ? " active" : ""}`}
+          className={`sidebar-link${activeSection === "update" ? " active" : ""}`}
           onClick={() => {
-            navigate("/services");
-            setActiveSection("Services");
+            navigate("/admin/update");
+            setActiveSection("update");
             onClose();
           }}
         >
-          Services
-        </div>
-        <div
-          className={`sidebar-link${activeSection === "Colleges" ? " active" : ""}`}
-          onClick={() => {
-            navigate("#");
-            setActiveSection("Colleges");
-            onClose();
-          }}
-        >
-          Colleges
-        </div>
-        <div
-          className={`sidebar-link${activeSection === "Students" ? " active" : ""}`}
-          onClick={() => {
-            navigate("#");
-            setActiveSection("Students");
-            onClose();
-          }}
-        >
-          Students
-        </div>
-        <div
-          className={`sidebar-link${activeSection === "NGO" ? " active" : ""}`}
-          onClick={() => {
-            navigate("#");
-            setActiveSection("NGO");
-            onClose();
-          }}
-        >
-          NGO
+          Update
         </div>
         <div
           className={`sidebar-link${activeSection === "support" ? " active" : ""}`}
           onClick={() => {
-            navigate("#");
+            navigate("/admin/support");
             setActiveSection("support");
             onClose();
           }}
         >
-          Colleges
+          Support
         </div>
       </div>
 
@@ -141,7 +117,7 @@ const Navbar = ({ onHamburger }) => (
   </div>
 );
 
-const UserHeader = () => {
+const Header = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("cert");
 
@@ -159,4 +135,4 @@ const UserHeader = () => {
   );
 };
 
-export default UserHeader;
+export default Header;

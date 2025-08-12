@@ -20,6 +20,7 @@ import AllIssuedCertificates from "./pages/allIssuedCertificates";
 import VerifyCertificate from "./pages/VerifyCertificate";
 import UserDashboardLayout from "./components/UserLayout";
 import PaymentPage from "./pages/PaymentCert";
+import SuperAdminDashboardLayout from "./components/SuperAdminLayout";
 
 function App() {
   return (
@@ -80,12 +81,12 @@ function App() {
               </DashboardLayout>
             }
           />
-                                                  <Route
+                                        <Route
             path="superadmin/issued-certificates"
             element={
-              <DashboardLayout>
+              <SuperAdminDashboardLayout>
                 <AllIssuedCertificates />
-              </DashboardLayout>
+              </SuperAdminDashboardLayout>
             }
           />
         

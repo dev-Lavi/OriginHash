@@ -81,7 +81,7 @@ const IssuedCertificates = () => {
               <div>{cert.uniqueId}</div>
               <div>
                 <a
-                  href={cert.pdfLink}
+                  href={`http://localhost:4001${cert.imageLink}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={styles.previewBtn}

@@ -77,8 +77,7 @@ useEffect(() => {
       <div>
         <a
           href={`http://localhost:4001${cert.imageLink}`}
-          target="_blank"
-          rel="noopener noreferrer"
+          alt="Certificate Preview"
           className={styles.previewLink}
         >
           Preview
