@@ -34,8 +34,8 @@ const SuperAdminLogin = () => {
 
     try {
       setLoading(true);
-      const res = await axios.post(
-        "https://originhash.onrender.com/api/v1/admin/login",
+      const res = await axiosInstance.post(
+    "/api/v1/admin/login",
         payload
       );
 

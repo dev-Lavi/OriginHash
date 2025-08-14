@@ -21,6 +21,7 @@ import VerifyCertificate from "./pages/VerifyCertificate";
 import UserDashboardLayout from "./components/UserLayout";
 import PaymentPage from "./pages/PaymentCert";
 import SuperAdminDashboardLayout from "./components/SuperAdminLayout";
+import AllVerifiedCertificates from "./pages/AllVerifiedcertificates";
 
 function App() {
   return (
@@ -86,6 +87,14 @@ function App() {
             element={
               <SuperAdminDashboardLayout>
                 <AllIssuedCertificates />
+              </SuperAdminDashboardLayout>
+            }
+          />
+          <Route
+            path="superadmin/verified-certificates"
+            element={
+              <SuperAdminDashboardLayout>
+                <AllVerifiedCertificates />
               </SuperAdminDashboardLayout>
             }
           />

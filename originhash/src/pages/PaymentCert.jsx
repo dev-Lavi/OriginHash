@@ -3,6 +3,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import axiosInstance from "../api/axiosInstance";
 
 export default function PaymentPage() {
   const [cardNumber, setCardNumber] = useState("");
@@ -29,8 +30,8 @@ export default function PaymentPage() {
     try {
       const token = localStorage.getItem("authToken");
 
-      const res = await axios.post(
-        "http://localhost:4001/api/v1/cert/verify/payment",
+      const res = await axiosInstance.post(
+    "/api/v1/cert/verify/payment",
         {
           uniqueId,
           cardNumber,
